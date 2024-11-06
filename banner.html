@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Connection Banner</title>
+<link href="https://img.icons8.com/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body, html {
+        height: 80%;
+        width: 100%;
+    }
+
+    .banner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 700px; 
+        background-color: #ffffff;
+    }
+
+    .world-map-container {
+        width: 50%; 
+        height: 100%;
+        background: url('https://res.cloudinary.com/dd6qdgpfr/image/upload/v1730912574/rb_7605_vihsnw.png') no-repeat center center;
+        background-size: cover;
+        position: relative;
+    }
+
+    /* Location Pins */
+    .location-pin {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        animation: movePin 5s infinite alternate ease-in-out;
+    }
+
+    .location-pin:nth-child(1) { 
+        background-image: url('https://img.icons8.com/?size=100&id=ecnej834DMur&format=png&color=000000'); 
+        top: 20%; 
+        left: 30%; 
+    }
+
+    .location-pin:nth-child(2) { 
+        background-image: url('https://img.icons8.com/?size=100&id=6OOnASO9fxuG&format=png&color=000000'); 
+        top: 60%; 
+        left: 70%; 
+    }
+
+    .location-pin:nth-child(3) { 
+        background-image: url('https://img.icons8.com/?size=100&id=6OOnASO9fxuG&format=png&color=000000'); 
+        top: 50%; 
+        left: 40%; 
+    }
+
+    .location-pin:nth-child(4) { 
+        background-image: url('https://img.icons8.com/?size=100&id=PZTTDl8ML4vy&format=png&color=000000'); 
+        top: 30%; 
+        left: 80%; 
+    }
+
+    .location-pin:nth-child(5) { 
+        background-image: url('https://img.icons8.com/?size=100&id=6OOnASO9fxuG&format=png&color=000000'); 
+        top: 70%; 
+        left: 20%; 
+    }
+
+    @keyframes movePin {
+        0% { transform: translate(0, 0); }
+        50% { transform: translate(10px, 10px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    .right-content {
+        width: 50%; 
+        height: 100%;
+        background-color: #f4f4f4;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .text-content {
+        color: #333;
+        text-align: left;
+        width: 100%;
+        max-width: 500px;
+        background-color: rgba(255, 255, 255, 0.8); 
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .text-content h1 {
+        font-size: 2.4em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .text-content p {
+        font-size: 1.1em;
+        line-height: 1.5;
+        color: #555;
+    }
+
+    .person-computer {
+        width: 100%;
+        height: 250px;
+        background: url('https://res.cloudinary.com/dd6qdgpfr/image/upload/v1730915421/lovepik-man-working-in-front-of-computer-25d-business-png-image_401495044_wh1200-removebg_rr1ujj.png') no-repeat center center;
+        background-size: contain;
+        margin-top: 20px;
+    }
+
+    .currency {
+        position: absolute;
+        right: 20px;
+        top: 10%;
+        width: 50px;
+        height: 50px;
+        background-color: #ff8c00;
+        color: white;
+        font-size: 1.5em;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: floatCurrency 3s infinite ease-in-out;
+    }
+
+    @keyframes floatCurrency {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+
+    <div class="world-map-container">
+        <div class="location-pin"></div>
+        <div class="location-pin"></div>
+        <div class="location-pin"></div>
+        <div class="location-pin"></div>
+        <div class="location-pin"></div>
+    </div>
+
+    <div class="right-content">
+        <div class="text-content">
+            <h1>WE CONNECT CONTINENTS</h1>
+            <p>We Cloud Qlobe, a leading global call center solutions provider, offering you a complete resolution for A-Z destinations across the world.</p>
+        </div>
+
+        <div class="person-computer"></div>
+    </div>
+
+</div>
+
+<div class="currency">$</div>
+
+</body>
+</html>

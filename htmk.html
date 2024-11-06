@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated World Map with Location Pins</title>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<style>
+    /* Container for the SVG map */
+    #map {
+        width: 100%;
+        height: 500px;
+        background-color: #e0f7fa;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Location Pin style */
+    .location-pin {
+        fill: red;
+        stroke: white;
+        stroke-width: 1.5;
+        transform-origin: center;
+        animation: pulse 2s infinite;
+    }
+
+    /* Pulse animation for location pins */
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+<script>
+    // Define width and height of SVG
+    const width = 960;
+    const height = 500;
+
+    // Append SVG to the map container
+    const svg = d3.select("#map")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Define a projection and path generator
+    const projection = d3.geoMercator()
+        .scale(150)
+        .translate([width / 2, height / 1.5]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // Load world map data (TopoJSON format for lightweight vector graphics)
+    d3.json("https://d3js.org/world-110m.v1.json").then(worldData => {
+        // Draw the map using TopoJSON
+        svg.append("g")
+            .selectAll("path")
+            .data(topojson.feature(worldData, worldData.objects.countries).features)
+            .enter()
+            .append("path")
+            .attr("fill", "#b0c4de")
+            .attr("stroke", "#ffffff")
+            .attr("d", path);
+
+        // Define sample locations (latitude, longitude)
+        const locations = [
+            { name: "New York", coordinates: [-74.006, 40.7128], color: "#ff5722" },
+            { name: "London", coordinates: [-0.1276, 51.5074], color: "#4caf50" },
+            { name: "Tokyo", coordinates: [139.6917, 35.6895], color: "#2196f3" },
+            { name: "Sydney", coordinates: [151.2093, -33.8688], color: "#ffeb3b" },
+            { name: "Mumbai", coordinates: [72.8777, 19.0760], color: "#9c27b0" }
+        ];
+
+        // SVG Path for Location Pin Shape
+        const pinPath = "M12 2C8.13 2 5 5.13 5 9c0 4.16 5.4 10.66 6.11 11.46.29.32.72.54 1.15.54s.86-.22 1.15-.54C14.6 19.66 20 13.16 20 9c0-3.87-3.13-7-7-7zm0 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z";
+
+        // Add location pins for each location
+        svg.selectAll(".location-pin")
+            .data(locations)
+            .enter()
+            .append("path")
+            .attr("class", "location-pin")
+            .attr("d", pinPath) // Use the custom SVG path for pin
+            .attr("fill", d => d.color) // Set different colors for each location
+            .attr("transform", d => {
+                const [x, y] = projection(d.coordinates);
+                return `translate(${x}, ${y}) scale(0.6)`; // Adjust scale to fit the map
+            });
+    });
+
+    // Step 4: Create a rotating effect
+    let rotation = 0;
+
+    function rotateMap() {
+        rotation += 0.2;
+        projection.rotate([rotation, 0]);
+
+        svg.selectAll("path").attr("d", path);
+        svg.selectAll(".location-pin")
+            .attr("transform", d => {
+                const [x, y] = projection(d.coordinates);
+                return `translate(${x}, ${y}) scale(0.6)`;
+            });
+
+        requestAnimationFrame(rotateMap);
+    }
+
+    rotateMap(); // Start rotating map
+</script>
+
+</body>
+</html>
