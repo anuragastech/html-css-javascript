@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Dots</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            background-color: #1E1C26;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        // Set up the canvas
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        // Array to store dots
+        var dots = [];
+
+        // Mouse position
+        var mouseX = width / 2;
+        var mouseY = height / 2;
+
+        // Dot class to represent each moving dot
+        function Dot(x, y, radius, speedX, speedY) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.speedX = speedX;
+            this.speedY = speedY;
+            this.alpha = 1;
+
+            // Update position and draw the dot
+            this.update = function() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Change direction if the dot hits the edges of the canvas
+                if (this.x - this.radius < 0 || this.x + this.radius > width) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y - this.radius < 0 || this.y + this.radius > height) {
+                    this.speedY = -this.speedY;
+                }
+
+                // Draw the dot
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(255, 255, 255, ' + this.alpha + ')';
+                ctx.fill();
+                ctx.closePath();
+            };
+        }
+
+        // Function to create random dots
+        function createDots() {
+            for (var i = 0; i < 100; i++) {
+                var radius = Math.random() * 2 + 1;  // Random radius between 1 and 3
+                var x = Math.random() * width;
+                var y = Math.random() * height;
+                var speedX = (Math.random() - 0.5) * 2;  // Random speedX
+                var speedY = (Math.random() - 0.5) * 2;  // Random speedY
+
+                var dot = new Dot(x, y, radius, speedX, speedY);
+                dots.push(dot);
+            }
+        }
+
+        // Update canvas based on mouse position
+        function updateMousePosition(event) {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        // Animate the dots
+        function animate() {
+            ctx.clearRect(0, 0, width, height);  // Clear the canvas
+
+            for (var i = 0; i < dots.length; i++) {
+                dots[i].update();
+            }
+
+            // Create a trail effect by reducing the opacity of the dots based on mouse position
+            for (var i = 0; i < dots.length; i++) {
+                var dot = dots[i];
+                var dist = Math.sqrt((dot.x - mouseX) * (dot.x - mouseX) + (dot.y - mouseY) * (dot.y - mouseY));
+                dot.alpha = Math.max(0, 1 - dist / 200);  // Set alpha to create a fade effect as the mouse gets closer
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Event listener for mouse movement
+        window.addEventListener('mousemove', updateMousePosition);
+
+        // Initialize and start the animation
+        createDots();
+        animate();
+    </script>
+</body>
+</html>

@@ -19,7 +19,7 @@
 
     /* Location Pin style */
     .location-pin {
-        
+
         fill: red;
         stroke: white;
         stroke-width: 1.5;
@@ -52,16 +52,13 @@
         .attr("width", width)
         .attr("height", height);
 
-    // Define a projection and path generator
     const projection = d3.geoMercator()
         .scale(150)
         .translate([width / 2, height / 1.5]);
 
     const path = d3.geoPath().projection(projection);
 
-    // Load world map data (TopoJSON format for lightweight vector graphics)
     d3.json("https://d3js.org/world-110m.v1.json").then(worldData => {
-        // Draw the map using TopoJSON
         svg.append("g")
             .selectAll("path")
             .data(topojson.feature(worldData, worldData.objects.countries).features)
@@ -71,7 +68,6 @@
             .attr("stroke", "#ffffff")
             .attr("d", path);
 
-        // Define sample locations (latitude, longitude)
         const locations = [
             { name: "New York", coordinates: [-74.006, 40.7128], color: "#ff5722" },
             { name: "London", coordinates: [-0.1276, 51.5074], color: "#4caf50" },
@@ -114,7 +110,7 @@
         requestAnimationFrame(rotateMap);
     }
 
-    rotateMap(); // Start rotating map
+    rotateMap(); 
 </script>
 
 </body>

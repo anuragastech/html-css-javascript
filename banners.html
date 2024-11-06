@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .container {
+            background-color: #14002d;
+            height: 80vh;
+            position: relative;
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .text-content {
+            font-family: sans-serif;
+            position: relative;
+            color: #08b9f7 #c03dff;
+            margin-left: 100px;
+            margin-bottom:130px;
+        }
+
+        .text-content h1 {
+            background: -webkit-linear-gradient(0deg, #ca36ff, #08b8f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: background 0.3s ease-in-out;
+            font-size: min(max(30px, calc(1.7rem +((1vw - 2.5px)* 3.2879))), 55px);
+            font-family: inherit;
+        }
+
+        .text-content p {
+            font-size: 20px;
+            background: -webkit-linear-gradient(0deg, #ffffff, #08b8f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: background 0.3s ease-in-out;
+            font-size: 1.6rem;
+            font-family: inherit;
+            box-shadow: 2px white;
+        }
+
+        .person-computer {
+            width: 100%;
+            height: 350px;
+            background: url('https://res.cloudinary.com/dd6qdgpfr/image/upload/v1730915421/lovepik-man-working-in-front-of-computer-25d-business-png-image_401495044_wh1200-removebg_rr1ujj.png') no-repeat bottom left;
+            background-size: contain;
+            position: absolute;
+            bottom: 0;
+            left: 150px;
+            margin-top: 20px;
+        }
+
+        .animation-wrapper {
+            width: 60vmin;
+            height: 60vmin;
+            position: absolute;
+            top: 20%;
+            right: 10%; 
+            perspective: 1000px;
+        }
+
+        .ball-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 80%;
+            margin: -50% 0 0 -50%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0701b, #e35252);
+            box-shadow: 0 0 30px rgb(255, 255, 255), 0 0 60px rgba(173, 165, 165, 0.4);
+            animation: rotateBall 12s infinite linear;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s ease-in-out;
+            border: 2px solid rgb(255, 255, 255); 
+        }
+
+        @keyframes rotateBall {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: rgb(189, 138, 186);
+            border-radius: 100%;
+            animation: moveDots 3s infinite ease-in-out;
+        }
+
+        @keyframes moveDots {
+            0% {
+                transform: rotate(0deg) translateX(35px);
+            }
+            25% {
+                transform: rotate(90deg) translateX(35px);
+            }
+            50% {
+                transform: rotate(180deg) translateX(35px);
+            }
+            75% {
+                transform: rotate(270deg) translateX(35px);
+            }
+            100% {
+                transform: rotate(360deg) translateX(35px);
+            }
+        }
+
+        .background-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+        }
+
+        .background-dot {
+            position: absolute;
+            width: 2.8px;
+            height: 2.8px;
+            background-color: rgba(38, 159, 200, 0.7);
+            border-radius: 50%;
+            animation: moveBackgroundDots 6s infinite ease-in-out;
+        }
+
+        @keyframes moveBackgroundDots {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(50px) translateY(50px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-content">
+            <h1>We Connect Continents</h1>
+            <p>
+                We Cloud Qlobe, a leading global call center solutions provider,<br />
+                offering you a complete resolution for A-Z destinations across the
+                world.
+            </p>
+        </div>
+
+        <!-- Image with text on the left and image on the bottom left -->
+        <div class="person-computer"></div>
+
+        <div class="animation-wrapper">
+            <div class="ball-animation">
+                <div class="dot" style="top: 51%; left: 50%;"></div>
+                <div class="dot" style="top: 10%; left: 50%;"></div>
+                <div class="dot" style="top: 50%; left: 90%;"></div>
+                <div class="dot" style="top: 90%; left: 10%;"></div>
+                <div class="dot" style="top: 50%; left: 10%;"></div>
+                <div class="dot" style="top: 60%; left: 10%;"></div>
+                <div class="dot" style="top: 50%; left: 50%;"></div>
+                <div class="dot" style="top: 80%; left: 50%;"></div>
+                <div class="dot" style="top: 50%; left: 10%;"></div>
+                <div class="dot" style="top: 90%; left: 50%;"></div>
+            </div>
+        </div>
+
+        <!-- Background Dots -->
+        <div class="background-dots">
+            <div class="background-dot" style="top: 20%; left: 30%;"></div>
+            <div class="background-dot" style="top: 50%; left: 10%;"></div>
+            <div class="background-dot" style="top: 10%; left: 70%;"></div>
+            <div class="background-dot" style="top: 70%; left: 90%;"></div>
+            <div class="background-dot" style="top: 40%; left: 50%;"></div>
+            <div class="background-dot" style="top: 80%; left: 30%;"></div>
+            <div class="background-dot" style="top: 60%; left: 80%;"></div>
+            <div class="background-dot" style="top: 30%; left: 20%;"></div>
+            <div class="background-dot" style="top: 90%; left: 40%;"></div>
+            <div class="background-dot" style="top: 50%; left: 60%;"></div>
+            <div class="background-dot" style="top: 60%; left: 80%;"></div>
+            <div class="background-dot" style="top: 30%; left: 20%;"></div>
+            <div class="background-dot" style="top: 90%; left: 40%;"></div>
+            <div class="background-dot" style="top: 50%; left: 20%;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Create a subtle pulse effect to make the ball feel interactive
+        const ball = document.querySelector('.ball-animation');
+        let scale = 1;
+        let direction = 1;
+
+        function animate() {
+            // Animate the ball's pulse effect dynamically
+            if (scale >= 1.05 || scale <= 1) {
+                direction *= -1;
+            }
+            scale += 0.005 * direction;
+            ball.style.transform = `scale(${scale})`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
