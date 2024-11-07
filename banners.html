@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Responsive Page</title>
     <style>
         .container {
-            background-color: #14002d;
+            background-color: #59585c;
             height: 80vh;
             position: relative;
             display: flex;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             align-items: center;
             overflow: hidden;
+            padding: 0 5%; /* Added padding for better space distribution */
         }
 
         .text-content {
             font-family: sans-serif;
             position: relative;
             color: #08b9f7 #c03dff;
-            margin-left: 100px;
-            margin-bottom:130px;
+            margin-left: 5%; 
+            margin-bottom: 30vh;
+            max-width: 600px; /
         }
 
         .text-content h1 {
@@ -30,6 +32,8 @@
             transition: background 0.3s ease-in-out;
             font-size: min(max(30px, calc(1.7rem +((1vw - 2.5px)* 3.2879))), 55px);
             font-family: inherit;
+            /* text-shadow: 0px 4px 10px rgba(240, 240, 240, 0.996); Adding shadow for more depth */
+            /* animation: textGlow .3s ease-in-out infinite alternate;  */
         }
 
         .text-content p {
@@ -38,9 +42,29 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: background 0.3s ease-in-out;
-            font-size: 1.6rem;
             font-family: inherit;
             box-shadow: 2px white;
+            /* text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6); Adding subtle text shadow */
+            animation: textSlideIn 3s ease-in-out infinite alternate; /* Added slide animation */
+
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0px 4px 10px rgba(255, 255, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0px 4px 20px rgba(255, 255, 255, 1);
+            }
+        }
+
+        @keyframes textSlideIn {
+            0% {
+                transform: translateX(-20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .person-computer {
@@ -50,16 +74,17 @@
             background-size: contain;
             position: absolute;
             bottom: 0;
-            left: 150px;
+            left: 10%;
             margin-top: 20px;
+            max-width: 400px; /* Limit max width for better responsiveness */
         }
 
         .animation-wrapper {
-            width: 60vmin;
-            height: 60vmin;
+            width: 40vmin;
+            height: 40vmin;
             position: absolute;
             top: 20%;
-            right: 10%; 
+            right: 10%;
             perspective: 1000px;
         }
 
@@ -78,7 +103,7 @@
             justify-content: center;
             align-items: center;
             transition: transform 0.8s ease-in-out;
-            border: 2px solid rgb(255, 255, 255); 
+            border: 2px solid rgb(255, 255, 255);
         }
 
         @keyframes rotateBall {
@@ -123,12 +148,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; 
+            pointer-events: none;
         }
 
         .background-dot {
             position: absolute;
-            width: 2.8px;
+            width: 3px;
             height: 2.8px;
             background-color: rgba(38, 159, 200, 0.7);
             border-radius: 50%;
@@ -146,18 +171,70 @@
                 transform: translateX(0) translateY(0);
             }
         }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: auto; /* Allow the container to adjust height for smaller screens */
+            }
+
+            .text-content {
+                margin-left: 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .person-computer {
+                left: 50%;
+                transform: translateX(-50%);
+                max-width: 80%;
+                height: 250px; 
+            }
+
+            .animation-wrapper {
+                width: 50vmin;
+                height: 50vmin;
+            }
+
+            .ball-animation {
+                width: 70%;
+                height: 70%;
+            }
+
+            .background-dot {
+                width: 2px;
+                height: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-content h1 {
+                font-size: 1.5rem; /* Smaller font size for mobile */
+            }
+
+            .text-content p {
+                font-size: 1.2rem; 
+            }
+
+            .animation-wrapper {
+                width: 40vmin;
+                height: 40vmin;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="text-content">
+        <!-- <div class="text-content">
             <h1>We Connect Continents</h1>
             <p>
                 We Cloud Qlobe, a leading global call center solutions provider,<br />
                 offering you a complete resolution for A-Z destinations across the
                 world.
             </p>
-        </div>
+        </div> -->
 
         <!-- Image with text on the left and image on the bottom left -->
         <div class="person-computer"></div>
@@ -179,41 +256,12 @@
 
         <!-- Background Dots -->
         <div class="background-dots">
-            <div class="background-dot" style="top: 20%; left: 30%;"></div>
-            <div class="background-dot" style="top: 50%; left: 10%;"></div>
-            <div class="background-dot" style="top: 10%; left: 70%;"></div>
-            <div class="background-dot" style="top: 70%; left: 90%;"></div>
-            <div class="background-dot" style="top: 40%; left: 50%;"></div>
-            <div class="background-dot" style="top: 80%; left: 30%;"></div>
-            <div class="background-dot" style="top: 60%; left: 80%;"></div>
-            <div class="background-dot" style="top: 30%; left: 20%;"></div>
-            <div class="background-dot" style="top: 90%; left: 40%;"></div>
-            <div class="background-dot" style="top: 50%; left: 60%;"></div>
-            <div class="background-dot" style="top: 60%; left: 80%;"></div>
-            <div class="background-dot" style="top: 30%; left: 20%;"></div>
-            <div class="background-dot" style="top: 90%; left: 40%;"></div>
-            <div class="background-dot" style="top: 50%; left: 20%;"></div>
+            <div class="background-dot" style="top: 12%; left: 21%;"></div>
+            <div class="background-dot" style="top: 60%; left: 15%;"></div>
+            <div class="background-dot" style="top: 50%; left: 22%;"></div>
+            <div class="background-dot" style="top: 17%; left: 35%;"></div>
+            <div class="background-dot" style="top: 20%; left: 67%;"></div>
         </div>
     </div>
-
-    <script>
-        // Optional: Create a subtle pulse effect to make the ball feel interactive
-        const ball = document.querySelector('.ball-animation');
-        let scale = 1;
-        let direction = 1;
-
-        function animate() {
-            // Animate the ball's pulse effect dynamically
-            if (scale >= 1.05 || scale <= 1) {
-                direction *= -1;
-            }
-            scale += 0.005 * direction;
-            ball.style.transform = `scale(${scale})`;
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
 </body>
 </html>
