@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Banner</title>
+    <style>
+        /* Gradient Background Animation */
+        @keyframes gradientBackground {
+            0% { background: linear-gradient(45deg, #438f80, #54dd84); }
+            50% { background: linear-gradient(45deg, #2e5f54, #23b1bb); }
+            100% { background: linear-gradient(45deg, #336e66, #1bb46c); }
+        }
+
+        /* Container */
+        .container {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            overflow: hidden;
+            animation: gradientBackground 10s ease-in-out infinite; /* Gradient animation */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Adds depth */
+            border-radius: 20px;
+        }
+
+        /* Text Content */
+        .text-content {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 40%;
+            animation: textSlide 2s ease-out forwards; /* Text sliding animation */
+        }
+
+        .text-content h1 {
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            animation: textFadeIn 2s ease-out forwards; /* Fade-in text */
+        }
+
+        .text-content p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: #e2e2e2;
+            line-height: 1.6;
+            animation: textFadeIn 2s ease-out forwards; /* Fade-in text */
+        }
+        .animated-item{
+            position: absolute;
+            left: 10%;
+            top: 10%;
+        }
+
+        /* Text Animation */
+        @keyframes textSlide {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Layer Wrapper */
+        .layer-wrapper {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 400px;
+            overflow: visible;
+            animation: floatUp 10s infinite alternate; 
+        }
+
+        /* Floating Animation for the Circles */
+        @keyframes floatUp {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Circle Layers */
+        .circle-layer {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .circle-layer1 {
+            width: 250px;
+            height: 250px;
+            border: 1px solid #ffffff;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .circle-layer2 {
+            width: 310px;
+            height: 310px;
+            border: 8px solid rgb(255, 255, 255);
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .circle-layer3 {
+            width: 360px;
+            height: 360px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px 2px rgba(250, 250, 250, 0.6);
+            animation: pulse 5s infinite ease-in-out;
+        }
+
+        /* Circle Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Main Earphone */
+        .main-earphone {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: rotateEarphone 10s linear infinite; /* Rotating earphone animation */
+        }
+
+        @keyframes rotateEarphone {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .earphone img {
+            width: 100%;
+            object-fit: contain;
+            transform: scale(1.1);
+            filter: brightness(0) invert(1);
+        }
+
+        /* Connectivity Icon Inside the Earphone */
+        .connectivity-icon {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotateIcon 10s linear infinite; /* Rotating icon animation */
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg) translate(-50%, -50%); }
+            100% { transform: rotate(360deg) translate(-50%, -50%); }
+        }
+
+        .connectivity-icon img {
+            width: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Icons Positioned Outside the Circles */
+        .icon-wrapper {
+            position: absolute;
+            z-index: 2;
+            animation: bounce 5s infinite ease-in-out; /* Bounce effect for icons */
+        }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s;
+        }
+
+        .icon1, .icon4 {
+            filter: brightness(0) invert(1);
+        }
+
+        .icon-wrapper:hover .icon {
+            transform: scale(1.2);
+            filter: drop-shadow(0px 6px 10px rgb(0, 0, 0));
+        }
+
+        .icon1 { 
+    top: 40px;
+    left: 20px;
+}
+
+.icon2 { 
+    top: 60px; 
+    right: -30px; 
+}
+
+.icon3 { 
+    bottom: 70px;
+    left: -20px; 
+}
+
+.icon4 { 
+    bottom: 70px;
+    right: -30px; 
+}
+
+.icon5 { 
+    top: 10px;
+    left: 60px; 
+}
+
+.icon6 { 
+    top: 20px;
+    right: 10px;
+}
+
+.icon7 { 
+    bottom: 10px; 
+    left: 10px; 
+}
+
+.icon8 { 
+    bottom: -20px; 
+    right: 40px; 
+}
+
+
+        /* Dotted Line at Bottom */
+        .dotted-line {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 5%;
+            border-top: 2px dotted #08b8f6;
+            opacity: 0.8;
+        }
+
+        /* Decorative Dots */
+        .decorative-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: blink 1.5s infinite alternate;
+        }
+
+        .dot1 { top: 15%; left: 15%; }
+        .dot2 { top: 15%; right: 55%; }
+        .dot4 { bottom: 15%; right: 15%; }
+
+        /* Animation for Dots */
+        @keyframes blink {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+
+        /* Moving Dots on Mouse Movement */
+        .moving-dot {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            transform: scale(0.5);
+            animation: moveDot 1s ease-out forwards;
+        }
+
+        @keyframes moveDot {
+            from { transform: scale(0.5); opacity: 0.8; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="animated-item">
+            <canvas id="animationCanvas" width="300" height="300"></canvas>
+
+        </div>
+        <div class="text-content">
+            <h1>We Connect Continents</h1>
+            <p>
+                We Cloud Qlobe, a leading global call center solutions provider,<br />
+                offering you a complete resolution for A-Z destinations across the world.
+            </p>
+        </div>
+
+        <!-- Layer Wrapper with Circles and Earphone in the Center -->
+        <div class="layer-wrapper">
+            <div class="circle-layer circle-layer1"></div>
+            <div class="circle-layer circle-layer2"></div>
+            <div class="circle-layer circle-layer3"></div>
+
+            <div class="main-earphone">
+                <div class="earphone">
+                    <img src="https://res.cloudinary.com/dd6qdgpfr/image/upload/v1730976578/Microphone-Headset-Transparent_eilrqm.png" alt="Earphone">
+                </div>
+                <div class="connectivity-icon">
+                    <!-- You can place a rotating icon here if needed -->
+                </div>
+            </div>
+
+            <!-- Icons Positioned Around the Circles -->
+            <div class="icon-wrapper icon1">
+                <img src="https://img.icons8.com/color/48/000000/wifi--v1.png" alt="WiFi Icon" class="icon">
+            </div>
+            <div class="icon-wrapper icon2">
+                <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Icon" class="icon">
+            </div>
+            <div class="icon-wrapper icon3">
+                <img src="https://img.icons8.com/color/48/000000/worldwide-location--v1.png" alt="Location Icon" class="icon">
+            </div>
+            <div class="icon-wrapper icon4">
+                <img src="https://res.cloudinary.com/dd6qdgpfr/image/upload/v1730982462/drilldown-removebg-preview_omnz2v.png" alt="Connectivity Icon" class="icon">
+            </div>
+            
+            <!-- Additional Connectivity Icons -->
+         
+          
+            <div class="icon-wrapper icon8">
+                <!-- <img  style="color: #8a8ea3;" src="https://img.icons8.com/ios/50/000000/bluetooth.png" alt="Bluetooth Icon" class="icon"> -->
+            </div>
+         
+</div>
+        </div>
+
+        <!-- Dotted Line at Bottom -->
+        <div class="dotted-line"></div>
+    </div>
+
+    <script>
+        // Create moving dots on mouse movement
+        document.addEventListener("mousemove", function(e) {
+            let dot = document.createElement("div");
+            dot.classList.add("moving-dot");
+            dot.style.left = `${e.pageX - 10}px`;
+            dot.style.top = `${e.pageY - 10}px`;
+            document.body.appendChild(dot);
+
+            setTimeout(function() {
+                dot.remove();
+            }, 2000); // Remove dot after animation
+        });
+    </script>
+</body>
+</html>
+
+
+
+<script>
+    // Animation Code for Technology Effect
+    var points = [],
+        velocity2 = 5, // velocity squared
+        canvas = document.getElementById('animationCanvas'),
+        context = canvas.getContext('2d'),
+        radius = 5,
+        boundaryX = 300,
+        boundaryY = 300,
+        numberOfPoints = 30;
+
+    init();
+
+    function init() {
+        // create points
+        for (var i = 0; i < numberOfPoints; i++) {
+            createPoint();
+        }
+        // create connections
+        for (var i = 0, l = points.length; i < l; i++) {
+            var point = points[i];
+            if (i == 0) {
+                points[i].buddy = points[points.length - 1];
+            } else {
+                points[i].buddy = points[i - 1];
+            }
+        }
+        // animate
+        animate();
+    }
+
+    function createPoint() {
+        var point = {}, vx2, vy2;
+        point.x = Math.random() * boundaryX;
+        point.y = Math.random() * boundaryY;
+        // random vx 
+        point.vx = (Math.floor(Math.random()) * 2 - 1) * Math.random();
+        vx2 = Math.pow(point.vx, 2);
+        // vy^2 = velocity^2 - vx^2
+        vy2 = velocity2 - vx2;
+        point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+        points.push(point);
+    }
+
+    function resetVelocity(point, axis, dir) {
+        var vx, vy;
+        if (axis == 'x') {
+            point.vx = dir * Math.random();  
+            vx2 = Math.pow(point.vx, 2);
+            vy2 = velocity2 - vx2;
+            point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+        } else {
+            point.vy = dir * Math.random();  
+            vy2 = Math.pow(point.vy, 2);
+            vx2 = velocity2 - vy2;
+            point.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
+        }
+    }
+
+    function drawCircle(x, y) {
+        context.beginPath();
+        context.arc(x, y, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = '#97badc';
+        context.fill();  
+    }
+
+    function drawLine(x1, y1, x2, y2) {
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.strokeStyle = '#8ab2d8'
+        context.stroke();
+    }
+
+    function draw() {
+        for (var i = 0, l = points.length; i < l; i++) {
+            // circles
+            var point = points[i];
+            point.x += point.vx;
+            point.y += point.vy;
+            drawCircle(point.x, point.y);
+            // lines
+            drawLine(point.x, point.y, point.buddy.x, point.buddy.y);
+            // check for edge
+            if (point.x < 0 + radius) {
+                resetVelocity(point, 'x', 1);
+            } else if (point.x > boundaryX - radius) {
+                resetVelocity(point, 'x', -1);
+            } else if (point.y < 0 + radius) {
+                resetVelocity(point, 'y', 1);
+            } else if (point.y > boundaryY - radius) {
+                resetVelocity(point, 'y', -1);
+            }
+        }
+    }
+
+    function animate() {
+        context.clearRect(0, 0, 300, 300);
+        draw();
+        requestAnimationFrame(animate);
+    }
+</script>

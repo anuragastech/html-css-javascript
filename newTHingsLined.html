@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Banner</title>
+    <style>
+        /* Gradient Background Animation */
+        @keyframes gradientBackground {
+            0% { background: linear-gradient(45deg, #23166e, #0a1e8d); }
+            50% { background: linear-gradient(45deg, #070536, #06225f); }
+            100% { background: linear-gradient(45deg, #15035c, #24074a); }
+        }
+
+        /* Container */
+        .container {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            overflow: hidden;
+            animation: gradientBackground 10s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        /* Canvas for Animation */
+        #animationCanvas {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            transform: rotate(45deg);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Text Content */
+        .text-content {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 40%;
+            animation: textSlide 2s ease-out forwards;
+            z-index: 2;
+        }
+
+        .text-content h1 {
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            animation: textFadeIn 2s ease-out forwards;
+        }
+
+        .text-content p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: #e2e2e2;
+            line-height: 1.6;
+            animation: textFadeIn 2s ease-out forwards;
+        }
+
+        /* Other styles are omitted for brevity */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Canvas for Animation -->
+        <canvas id="animationCanvas" width="300" height="300"></canvas>
+
+        <div class="text-content">
+            <h1>We Connect Continents</h1>
+            <p>
+                We Cloud Qlobe, a leading global call center solutions provider,<br />
+                offering you a complete resolution for A-Z destinations across the world.
+            </p>
+        </div>
+
+        <!-- Other elements are omitted for brevity -->
+    </div>
+
+    <script>
+        // Animation for points and lines on canvas
+        var points = [],
+            velocity2 = 5, 
+            canvas = document.getElementById('animationCanvas'),
+            context = canvas.getContext('2d'),
+            radius = 5,
+            boundaryX = 300,
+            boundaryY = 300,
+            numberOfPoints = 30;
+
+        init();
+
+        function init() {
+            for (var i = 0; i < numberOfPoints; i++) {
+                createPoint();
+            }
+            for (var i = 0, l = points.length; i < l; i++) {
+                points[i].buddy = points[i === 0 ? points.length - 1 : i - 1];
+            }
+            animate();
+        }
+
+        function createPoint() {
+            var point = {};
+            point.x = Math.random() * boundaryX;
+            point.y = Math.random() * boundaryY;
+            point.vx = (Math.random() * 2 - 1) * Math.sqrt(velocity2 / 2);
+            point.vy = Math.sqrt(velocity2 - Math.pow(point.vx, 2)) * (Math.random() * 2 - 1);
+            points.push(point);
+        }
+
+        function resetVelocity(point, axis, dir) {
+            if (axis === 'x') {
+                point.vx = dir * Math.random();
+                point.vy = Math.sqrt(velocity2 - Math.pow(point.vx, 2)) * (Math.random() * 2 - 1);
+            } else {
+                point.vy = dir * Math.random();
+                point.vx = Math.sqrt(velocity2 - Math.pow(point.vy, 2)) * (Math.random() * 2 - 1);
+            }
+        }
+
+        function drawCircle(x, y) {
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = '#97badc';
+            context.fill();
+        }
+
+        function drawLine(x1, y1, x2, y2) {
+            context.beginPath();
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.strokeStyle = '#8ab2d8';
+            context.stroke();
+        }
+
+        function draw() {
+            context.clearRect(0, 0, boundaryX, boundaryY);
+            for (var i = 0, l = points.length; i < l; i++) {
+                var point = points[i];
+                point.x += point.vx;
+                point.y += point.vy;
+                drawCircle(point.x, point.y);
+                drawLine(point.x, point.y, point.buddy.x, point.buddy.y);
+
+                if (point.x < radius || point.x > boundaryX - radius) {
+                    resetVelocity(point, 'x', point.x < radius ? 1 : -1);
+                } 
+                if (point.y < radius || point.y > boundaryY - radius) {
+                    resetVelocity(point, 'y', point.y < radius ? 1 : -1);
+                }
+            }
+        }
+
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+</html>
